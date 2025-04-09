@@ -1,0 +1,89 @@
+/* Estilos generales */
+body {
+    padding-top: 56px;
+  }
+  
+  /* Tarjetas de torneos */
+  .card {
+    transition: transform 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Tabla de posiciones */
+  .table-standings {
+    width: 100%;
+  }
+  .table-standings th {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  /* Responsivo para móviles */
+  @media (max-width: 768px) {
+    .navbar-nav {
+      margin-top: 10px;
+    }
+    
+    .card {
+      margin-bottom: 20px;
+    }
+    
+    .table-responsive {
+      overflow-x: auto;
+    }
+  }
+
+  body {
+  padding-top: 56px;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+}
+body {
+  padding-top: 56px;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+}
+
+/* Estilos para formularios de autenticación */
+.auth-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.auth-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Mejoras para mensajes flash */
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

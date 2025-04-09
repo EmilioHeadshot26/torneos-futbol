@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <!-- Logo/Brand -->
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-trophy me-2"></i> Torneos Fútbol
+    </a>
+
+    <!-- Botón para móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido del navbar -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Menú izquierdo -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/torneos">
+            <i class="fas fa-list-ol me-1"></i> Torneos
+          </a>
+        </li>
+        <% if (user && user.rol === 'admin') { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">
+              <i class="fas fa-cog me-1"></i> Admin
+            </a>
+          </li>
+        <% } %>
+      </ul>
+
+      <!-- Menú derecho (login/logout) -->
+      <ul class="navbar-nav">
+        <% if (user) { %>
+          <!-- Usuario logueado -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+              <i class="fas fa-user-circle me-1"></i> <%= user.username %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-item-text">Rol: <strong><%= user.rol %></strong></span></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt me-1"></i> Cerrar sesión</a></li>
+            </ul>
+          </li>
+        <% } else { %>
+          <!-- Usuario invitado -->
+          <li class="nav-item">
+            <a class="nav-link" href="/login">
+              <i class="fas fa-sign-in-alt me-1"></i> Iniciar Sesión
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">
+              <i class="fas fa-user-plus me-1"></i> Registrarse 
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Agrega Font Awesome para íconos (en tu layout principal) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
