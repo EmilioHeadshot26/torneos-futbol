@@ -1,0 +1,25 @@
+<% include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>Editar Torneo</h2>
+  <form action="/torneos/<%= torneo.id %>/editar" method="POST">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" name="nombre" class="form-control" value="<%= torneo.nombre %>" required>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Fecha Inicio</label>
+        <input type="date" name="fechaInicio" class="form-control" value="<%= torneo.fechaInicio %>" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Fecha Fin</label>
+        <input type="date" name="fechaFin" class="form-control" value="<%= torneo.fechaInicio %>" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/torneos" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+<% include('../partials/footer') %>

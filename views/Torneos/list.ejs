@@ -1,0 +1,46 @@
+<% include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>Torneos</h2>
+  <a href="/torneos/nuevo" class="btn btn-primary mb-3">Nuevo Torneo</a>
+  
+  <div class="row">
+    <% torneos.forEach(torneo => { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= torneo.nombre %></h5>
+          <p class="card-text">
+            <%= torneo.fechaInicio %> al <%= torneo.fechaFin %>
+            <br>
+            <span class="badge bg-primary">
+              <%= torneo.equipos.length %> equipos inscritos
+            </span>
+          </p>
+          
+          <div class="btn-group">
+            <!-- Botón Ver -->
+            <a href="/torneos/<%= torneo.id %>" class="btn btn-sm btn-info">Ver</a>
+            
+            <!-- Botón Inscribir -->
+            <a href="/torneos/<%= torneo.id %>/inscribir" class="btn btn-sm btn-success">Inscribir Equipo</a>
+            
+            <!-- Botón Editar -->
+            <a href="/torneos/<%= torneo.id %>/editar" class="btn btn-sm btn-warning">Editar</a>
+            
+            <!-- Botón Eliminar (formulario POST) -->
+            <form action="/torneos/<%= torneo.id %>/eliminar" method="POST" style="display:inline">
+              <button type="submit" class="btn btn-sm btn-danger" 
+                      onclick="return confirm('¿Eliminar este torneo?')">
+                Eliminar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+
+<% include('../partials/footer') %>
+

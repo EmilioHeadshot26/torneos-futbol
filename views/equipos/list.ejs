@@ -1,0 +1,24 @@
+<% include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>Equipos</h2>
+  <form action="/equipos" method="POST">
+    <div class="input-group mb-3">
+      <input type="text" name="nombre" class="form-control" placeholder="Nombre del equipo">
+      <button class="btn btn-success" type="submit">Crear</button>
+    </div>
+  </form>
+
+  <ul class="list-group">
+    <% equipos.forEach(equipo => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= equipo.nombre %>
+        <span class="badge bg-primary rounded-pill">
+          <%= equipo.jugadores.length %> jugadores
+        </span>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+
+<% include('../partials/footer') %>

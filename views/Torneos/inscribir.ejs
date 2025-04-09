@@ -1,0 +1,19 @@
+<% include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>Inscribir Equipo en <%= torneo.nombre %></h2>
+  <form action="/torneos/<%= torneo.id %>/inscribir" method="POST">
+    <div class="mb-3">
+      <label class="form-label">Seleccionar Equipo</label>
+      <select name="equipoId" class="form-select" required>
+        <% equipos.forEach(equipo => { %>
+          <option value="<%= equipo.id %>"><%= equipo.nombre %></option>
+        <% }); %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Inscribir</button>
+    <a href="/torneos" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+<% include('../partials/footer') %>

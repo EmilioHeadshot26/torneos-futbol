@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 const app = express();
-
+const methodOverride = require('method-override');
+app.use(methodOverride('_method')); // Permite usar PUT/DELETE en formularios
 // Configuración
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -158,3 +159,52 @@ app.get('/admin', adminRequired, (req, res) => {
   res.render('admin', { user: req.session.user });
 });
 
+// ---- Operaciones CRUD para torneos ----
+// Eliminar torneo
+app.post('/torneos/:id/eliminar', (req, res) => {
+  const id = parseInt(req.params.id);
+  torneos = torneos.filter(torneo => torneo.id !== id);
+  res.redirect('/torneos');
+});
+
+// Mostrar formulario de edición
+app.get('/torneos/:id/editar', (req, res) => {
+  const id = parseInt(req.params.id);
+  const torneo = torneos.find(t => t.id === id);
+  res.render('torneos/editar', { torneo });
+});
+
+// Procesar edición
+app.post('/torneos/:id/editar', (req, res) => {
+  const id = parseInt(req.params.id);
+  const { nombre, fechaInicio, fechaFin } = req.body;
+  const index = torneos.findIndex(t => t.id === id);
+  
+  if (index !== -1) {
+    torneos[index] = { ...torneos[index], nombre, fechaInicio, fechaFin };
+  }
+  
+  res.redirect('/torneos');
+});
+
+// Inscribir equipo (vista)
+app.get('/torneos/:id/inscribir', (req, res) => {
+  const id = parseInt(req.params.id);
+  const torneo = torneos.find(t => t.id === id);
+  res.render('torneos/inscribir', { torneo, equipos });
+});
+
+// Procesar inscripción
+app.post('/torneos/:id/inscribir', (req, res) => {
+  const torneoId = parseInt(req.params.id);
+  const equipoId = parseInt(req.body.equipoId);
+  
+  const torneo = torneos.find(t => t.id === torneoId);
+  const equipo = equipos.find(e => e.id === equipoId);
+  
+  if (torneo && equipo) {
+    torneo.equipos.push(equipoId);
+  }
+  
+  res.redirect(`/torneos/${torneoId}`);
+});
